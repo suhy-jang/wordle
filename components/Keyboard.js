@@ -7,7 +7,7 @@ export default function Keyboard({ onClick }) {
     ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '←'],
   ];
   return (
-    <div className="keyboard mx-2 flex flex-col items-center">
+    <div className="keyboard flex flex-col items-center">
       {keys.map((keyRow, rowIndex) => (
         <div
           key={`keyboard-${rowIndex}`}
@@ -18,7 +18,7 @@ export default function Keyboard({ onClick }) {
               key={colIndex}
               data-key={key}
               onClick={() => onClick(key)}
-              className="m-1 text-white px-2 py-1 rounded flex justify-center items-center uppercase flex-1 bg-gray-500"
+              className="m-[2px] text-white h-[58px] px-4 py-1 rounded flex justify-center items-center uppercase flex-1 bg-gray-500"
             >
               {key === '←' ? <BackSlash /> : key}
             </button>
