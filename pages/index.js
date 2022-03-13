@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Keyboard from '../components/Keyboard';
 import Board from '../components/Board';
-import { getWordle } from '../lib/word';
+import { getWordle, checkWordle } from '../lib/word';
 import BoardClass from '../utils/board';
 
 const boardInstance = new BoardClass();
@@ -58,9 +58,35 @@ export default function Home() {
     });
   };
 
-  const checkRow = () => {
+  const resetRow = () => {
+    setTypedWord('');
+    [0, 1, 2, 3, 4].forEach((col) => {
+      updateBoard({ point: { row, col }, value: '' });
+      const tile = document.getElementById(`row-${row}-col-${col}`);
+      tile.setAttribute('data', '');
+    });
+    setPoint({ row, col: 0 });
+  };
+
+  const showTimeoutMessage = (message) => {
+    setMessage(message);
+    const timeout = setTimeout(() => {
+      setMessage('');
+    }, 3000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  };
+
+  const checkRow = async () => {
     if (col < 5) return;
 
+    const check = await checkWordle(typedWord);
+    if (!check) {
+      showTimeoutMessage('word not in list');
+      resetRow();
+      return;
+    }
     flipTile();
     if (wordle === typedWord) {
       setMessage('Super!');
