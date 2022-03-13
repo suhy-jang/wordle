@@ -5,9 +5,6 @@ export default function BackSlash() {
       height="24"
       viewBox="0 0 24 24"
       width="24"
-      style={{
-        '--color-tone-1': '#ffffff;',
-      }}
     >
       <path
         fill="var(--color-tone-1)"

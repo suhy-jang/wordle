@@ -1,15 +1,13 @@
 import { useState } from 'react';
-import BackSlash from '../components/BackSlash';
+import Keyboard from '../components/Keyboard';
 
 export default function Home() {
-  const clickKey = (key) => {
+  const [currentRow, setCurrentRow] = useState(0);
+  const [currentTile, setCurrentTile] = useState(0);
+
+  const handleKey = (key) => {
     console.log('clicked', key);
   };
-  const keys = [
-    ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-    ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-    ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '←'],
-  ];
   const guessRows = [
     ['', '', '', '', ''],
     ['', '', '', '', ''],
@@ -19,7 +17,11 @@ export default function Home() {
     ['', '', '', '', ''],
   ];
   return (
-    <div className="nightmode">
+    <div
+      style={{
+        '--color-tone-1': '#ffffff;',
+      }}
+    >
       <header className="">
         <h1>Wordle</h1>
       </header>
@@ -38,25 +40,7 @@ export default function Home() {
             );
           })}
         </div>
-        <div className="keyboard mx-2 flex flex-col items-center">
-          {keys.map((keyRow, rowIndex) => (
-            <div
-              key={`keyboard-${rowIndex}`}
-              className="flex flex-row w-100 mt-0 mx-auto mb-2 touch-manipulation"
-            >
-              {keyRow.map((key, colIndex) => (
-                <button
-                  key={colIndex}
-                  data-key={key}
-                  onClick={() => clickKey(key)}
-                  className="m-1 text-white px-2 py-1 rounded flex justify-center items-center uppercase flex-1 bg-gray-500"
-                >
-                  {key === '←' ? <BackSlash /> : key}
-                </button>
-              ))}
-            </div>
-          ))}
-        </div>
+        <Keyboard onClick={handleKey} />
       </div>
     </div>
   );
