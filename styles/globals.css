@@ -5,3 +5,18 @@
 body {
   background-color: black;
 }
+
+.correct {
+  background-color: #538d4e;
+  border: none;
+}
+
+.present {
+  background-color: #b59f3b;
+  border: none;
+}
+
+.absent {
+  background-color: #3a3a3c;
+  border: none;
+}
