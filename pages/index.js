@@ -3,6 +3,8 @@ import Keyboard from '../components/Keyboard';
 import Board from '../components/Board';
 import { getWordle, checkWordle } from '../lib/word';
 import BoardClass from '../utils/board';
+import Message from '../components/Message';
+import Header from '../components/Header';
 
 const boardInstance = new BoardClass();
 const { board, updateBoard } = boardInstance;
@@ -13,6 +15,7 @@ export default function Home() {
   const [gameOver, setGameOver] = useState(false);
   const [message, setMessage] = useState('');
   const [wordle, setWordle] = useState('');
+  const [win, setWin] = useState(false);
 
   const { row, col } = point;
 
@@ -49,6 +52,7 @@ export default function Home() {
       setTimeout(() => {
         const { letter, state } = guessResults[index];
         tile.classList.add(state);
+        tile.setAttribute('data-animation', 'flip-in');
         const key = document.querySelector(`button[data-key=${letter}]`);
         if (key.classList.contains('correct')) return;
         key.classList.remove('present');
@@ -72,10 +76,24 @@ export default function Home() {
     setMessage(message);
     const timeout = setTimeout(() => {
       setMessage('');
-    }, 3000);
+    }, 2000);
     return () => {
       clearTimeout(timeout);
     };
+  };
+
+  const showAnimation = ({ target, type }) => {
+    switch (type) {
+      case 'notInList':
+        const tiles = document.getElementById(`row-${row}`).childNodes;
+        tiles.forEach((tile) => tile.setAttribute('data-animation', 'bounce'));
+        return;
+      case 'addLetter':
+        target.setAttribute('data-animation', 'pop');
+        return;
+      default:
+        return;
+    }
   };
 
   const checkRow = async () => {
@@ -83,7 +101,8 @@ export default function Home() {
 
     const check = await checkWordle(typedWord);
     if (!check) {
-      showTimeoutMessage('word not in list');
+      showTimeoutMessage('Not in word list');
+      showAnimation({ type: 'notInList' });
       resetRow();
       return;
     }
@@ -91,6 +110,7 @@ export default function Home() {
     if (wordle === typedWord) {
       setMessage('Super!');
       setGameOver(true);
+      setWin(true);
     } else if (row < 5) {
       setPoint({ row: row + 1, col: 0 });
     } else {
@@ -116,6 +136,7 @@ export default function Home() {
       setTypedWord(`${typedWord}${letter}`);
       const tile = document.getElementById(`row-${row}-col-${col}`);
       tile.setAttribute('data', letter);
+      showAnimation({ target: tile, type: 'addLetter' });
       setPoint({ ...point, col: col + 1 });
     }
   };
@@ -139,17 +160,9 @@ export default function Home() {
         '--color-tone-1': '#ffffff;',
       }}
     >
-      <header className="text-center h-[48px] py-2 text-2xl">
-        <h1>Wordle</h1>
-      </header>
+      <Header />
       <div className="game w-100 mx-auto">
-        <div className="message-container my-3 relative">
-          {message && (
-            <div className="rounded-[10px] bg-gray-500 w-fit mx-auto py-2 px-5 absolute left-0 right-0 -top-3">
-              {message}
-            </div>
-          )}
-        </div>
+        <Message message={message} win={win} />
         <Board board={board} />
         <Keyboard onClick={handleKey} gameOver={gameOver} />
       </div>

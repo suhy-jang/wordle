@@ -1,0 +1,89 @@
+.tile[data-animation='pop'] {
+  animation-name: PopIn;
+  animation-duration: 100ms;
+}
+
+@keyframes PopIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  40% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+}
+
+.message[data-animation='win'] {
+  animation: Win 3s 1 ease-in-out;
+}
+
+@keyframes Win {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  20% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  80% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.tile[data-animation='flip-in'] {
+  animation-name: FlipIn;
+  animation-duration: 250ms;
+  animation-timing-function: ease-in;
+}
+
+@keyframes FlipIn {
+  0% {
+    transform: rotateX(0);
+  }
+  100% {
+    transform: rotateX(-90deg);
+  }
+}
+
+.tile[data-animation='flip-out'] {
+  animation-name: FlipOut;
+  animation-duration: 250ms;
+  animation-timing-function: ease-in;
+}
+
+@keyframes FlipOut {
+  0% {
+    transform: rotateX(-90deg);
+  }
+  100% {
+    transform: rotateX(0);
+  }
+}
+
+.tile[data-animation='bounce'] {
+  animation-name: bounceHorizontal;
+  animation-duration: 250ms;
+  animation-fill-mode: both;
+  animation-timing-function: ease-in;
+}
+
+@keyframes bounceHorizontal {
+  0% {
+    transform: translateX(0px);
+  }
+  20% {
+    transform: translateX(15px);
+  }
+  80% {
+    transform: translateX(-15px);
+  }
+}

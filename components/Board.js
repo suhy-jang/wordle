@@ -1,6 +1,6 @@
 export default function Board({ board }) {
   return (
-    <div className="board-container mx-auto w-[330px] mb-10">
+    <div className="board-container mx-auto w-[330px] my-5">
       {board.map((row, rowIndex) => {
         return (
           <div key={rowIndex} id={`row-${rowIndex}`} className="flex">
@@ -9,7 +9,8 @@ export default function Board({ board }) {
                 <div
                   key={`${rowIndex}-${colIndex}`}
                   id={`row-${rowIndex}-col-${colIndex}`}
-                  className={`rounded text-white tile w-[62px] h-[62px] border-2 box-border flex m-[2px] justify-center items-center`}
+                  // data-animation={colIndex === 0 ? 'pop' : ''}
+                  className={`tile rounded text-white tile w-[62px] h-[62px] border-2 box-border flex m-[2px] justify-center items-center`}
                 >
                   {tile}
                 </div>
