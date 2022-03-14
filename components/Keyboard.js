@@ -18,7 +18,7 @@ export default function Keyboard({ onClick, gameOver }) {
               key={colIndex}
               data-key={key}
               onClick={() => onClick(key)}
-              className="m-[2px] text-white h-[58px] px-4 py-1 rounded flex justify-center items-center uppercase flex-1 bg-gray-500"
+              className="m-[2px] text-white text-sm sm:text-lg h-[58px] px-2.5 sm:px-4 py-1 rounded flex justify-center items-center uppercase flex-1 bg-gray-500"
               disabled={!!gameOver}
             >
               {key === '←' ? <BackSlash /> : key}
