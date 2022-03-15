@@ -74,12 +74,9 @@ export default function Home() {
 
   const showTimeoutMessage = (message) => {
     setMessage(message);
-    const timeout = setTimeout(() => {
+    setTimeout(() => {
       setMessage('');
     }, 2000);
-    return () => {
-      clearTimeout(timeout);
-    };
   };
 
   const showAnimation = ({ target, type }) => {
@@ -107,17 +104,20 @@ export default function Home() {
       return;
     }
     flipTile();
-    if (wordle === typedWord) {
-      setMessage('Super!');
-      setGameOver(true);
-      setWin(true);
-    } else if (row < 5) {
-      setPoint({ row: row + 1, col: 0 });
-    } else {
-      setMessage(`Game Over ( Answer: ${wordle} )`);
-      setGameOver(true);
-    }
-    setTypedWord('');
+
+    setTimeout(() => {
+      if (wordle === typedWord) {
+        setMessage('Super!');
+        setGameOver(true);
+        setWin(true);
+      } else if (row < 5) {
+        setPoint({ row: row + 1, col: 0 });
+      } else {
+        setMessage(`Game Over ( Answer: ${wordle} )`);
+        setGameOver(true);
+      }
+      setTypedWord('');
+    }, 2000);
   };
 
   const deleteLetter = () => {
