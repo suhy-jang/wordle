@@ -21,7 +21,7 @@ export default function Home() {
 
   const init = async () => {
     const word = await getWordle();
-    console.log(word);
+    console.log(`answer: ${word}`);
     if (word) setWordle(word);
   };
 
