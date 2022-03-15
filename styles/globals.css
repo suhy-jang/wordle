@@ -7,6 +7,17 @@ body {
   font-family: 'Rubik', sans-serif;
 }
 
+.key {
+  min-width: fit-content;
+  width: 30px;
+}
+
+@media screen and (min-width: 450px) {
+  .key {
+    width: 40px;
+  }
+}
+
 .correct {
   background-color: #538d4e;
   border: none;
