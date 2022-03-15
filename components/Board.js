@@ -9,7 +9,7 @@ export default function Board({ board }) {
                 <div
                   key={`${rowIndex}-${colIndex}`}
                   id={`row-${rowIndex}-col-${colIndex}`}
-                  className={`tile rounded text-white tile w-[52px] h-[52px] sm:w-[62px] sm:h-[62px] border-2 box-border flex m-[2px] justify-center items-center`}
+                  className={`tile rounded text-2xl text-white tile w-[54px] h-[52px] sm:w-[64px] sm:h-[62px] border-2 box-border flex m-[2px] justify-center items-center`}
                 >
                   {tile}
                 </div>

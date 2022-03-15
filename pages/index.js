@@ -114,7 +114,7 @@ export default function Home() {
     } else if (row < 5) {
       setPoint({ row: row + 1, col: 0 });
     } else {
-      setMessage('Game Over');
+      setMessage(`Game Over ( Answer: ${wordle} )`);
       setGameOver(true);
     }
     setTypedWord('');
